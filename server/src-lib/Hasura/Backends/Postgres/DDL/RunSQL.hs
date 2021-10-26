@@ -202,10 +202,6 @@ withMetadataCheck source cascade txAccess action = do
     liftEitherM $
       runExceptT $
         runTx (_pscExecCtx sourceConfig) txAccess $ do
-          -- Drop event triggers so no interference is caused to the sql query
-          forM_ (M.elems preActionTables) $ \tableInfo -> do
-            let eventTriggers = _tiEventTriggerInfoMap tableInfo
-            forM_ (M.keys eventTriggers) (liftTx . dropTriggerQ)
 
           -- Get the metadata before the sql query, everything, need to filter this
           (preActionTableMeta, preActionFunctionMeta) <- fetchMeta preActionTables preActionFunctions
