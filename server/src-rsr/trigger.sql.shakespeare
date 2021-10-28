@@ -1,3 +1,4 @@
+SELECT COUNT(1);
 -- CREATE OR REPLACE function hdb_catalog.#{qualifiedTriggerName}() RETURNS trigger
 --   LANGUAGE plpgsql
 --   AS $$
